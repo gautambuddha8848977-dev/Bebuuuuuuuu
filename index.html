@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Tuku ❤️</title>
+<style>
+body { font-family: Arial, sans-serif; background: #FFF7F8; text-align:center; padding:50px; overflow-x:hidden; }
+button { padding: 15px 30px; font-size:18px; margin:10px; border-radius:30px; cursor:pointer; }
+.yes { background:#FFD9E1; border:none; }
+.no { background:#F4E1E6; border:none; position:relative; }
+#letter, #proposal, #celebration { display:none; margin-top:40px; max-width:600px; margin-left:auto; margin-right:auto; text-align:left; }
+.heart {position:fixed; width:16px; height:16px; background:#F9C0D3; transform:rotate(45deg); animation: float 7s linear infinite; opacity:.6; pointer-events:none;}
+.heart::before, .heart::after {content:''; position:absolute; width:16px; height:16px; background:#F9C0D3; border-radius:50%;}
+.heart::before{top:-8px; left:0;} .heart::after{left:-8px; top:0;}
+@keyframes float {0% {transform:translateY(0) rotate(45deg); opacity:.6} 100% {transform:translateY(-100vh) rotate(45deg); opacity:0}}
+</style>
+</head>
+<body>
+
+<h1>Will you be my Valentine, Tuku? 💖</h1>
+<button class="yes" id="valYes">Yes</button>
+<button class="no" id="valNo">No</button>
+
+<div id="letter">
+  <p>
+  My dearest Tuku 💖,<br>
+  Since August 5, 2025, every day with you is a melody. Your laughter, your smile, everything about you fills my heart with joy.<br>
+  You make my mornings brighter and my nights warmer. Your words, your touch, your presence — everything about you is magic.<br>
+  I love the way you think, the way you dream, and the way you care so deeply for everyone around you.<br>
+  I am endlessly grateful for your love, your patience, your heart. Every moment with you feels like a new chapter of happiness.<br>
+  You are my best friend, my confidant, my love, my home.<br>
+  (…repeat similar romantic lines to fill ~200 lines for scrollable effect…)
+  </p>
+
+  <div id="proposal">
+    <h2>Will you marry me, Tuku? 💍</h2>
+    <button class="yes" id="marryYes">Yes 💍</button>
+    <button class="no" id="marryNo">No 🙈</button>
+  </div>
+</div>
+
+<div id="celebration">
+  <h1>Yaayyyyy! You're my wifeee! ❤️</h1>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  const valYes = document.getElementById("valYes");
+  const valNo = document.getElementById("valNo");
+  const letter = document.getElementById("letter");
+  const proposal = document.getElementById("proposal");
+  const marryYes = document.getElementById("marryYes");
+  const marryNo = document.getElementById("marryNo");
+  const celebration = document.getElementById("celebration");
+
+  // No buttons dodge
+  [valNo, marryNo].forEach(btn=>{
+    btn.addEventListener("mouseover", ()=>{
+      const x=Math.random()*200-100;
+      const y=Math.random()*40-20;
+      btn.style.transform=`translate(${x}px,${y}px)`;
+    });
+  });
+
+  // Valentine Yes → show letter + proposal + start hearts
+  valYes.addEventListener("click", ()=>{
+    letter.style.display="block";
+    proposal.style.display="block";
+    valYes.style.display="none";
+    valNo.style.display="none";
+    startHearts();
+    letter.scrollIntoView({behavior:"smooth"});
+  });
+
+  // Proposal Yes → show celebration
+  marryYes.addEventListener("click", ()=>{
+    celebration.style.display="block";
+    letter.style.display="none";
+    proposal.style.display="none";
+  });
+
+  // Floating hearts
+  function startHearts(){
+    setInterval(()=>{
+      const heart = document.createElement("div");
+      heart.className="heart";
+      heart.style.left=Math.random()*100 + "vw";
+      heart.style.bottom="-20px";
+      heart.style.animationDuration = 5 + Math.random()*3 + "s";
+      document.body.appendChild(heart);
+      setTimeout(()=>heart.remove(),7000);
+    },300);
+  }
+});
+</script>
+
+</body>
+</html>
